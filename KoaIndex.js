@@ -24,9 +24,21 @@ const client = new Client({
 
 client.connect();
 
-async function myFun(originalName){
+router.get('/', main)
+    .post('/api', link)
+    .get('/register', registerGet)
+    .post('/register', registerPOST)
+    .get('/login', loginGet)
+    .post('/login', loginPost);
+
+
+async function main(ctx) {
+    await ctx.render('index');
+}
+
+async function link(ctx) {
     let linkRequest = {
-        destination: originalName,
+        destination: ctx.request.body.OriginalName,
         domain: { fullName: "rebrand.ly" }
     };
 
@@ -49,31 +61,24 @@ async function myFun(originalName){
             if (err) throw err;
         });
 
+
     });
-}
 
-
-router.get('/',  async (ctx) => {
-     await ctx.render('index');
-});
-
-router.post('/api',  async (ctx) => {
-
-    await myFun(ctx.request.body.OriginalName);
 
     const res = await client.query('SELECT * FROM urlinfo order by ID DESC limit 1 ');
+    console.log('123');
 
     await ctx.render('dev', {
         shortName: res.rows[0].shortname,
         originalName: res.rows[0].originalname
     });
-});
+}
 
-router.get('/register', async (ctx) => {
+async function registerGet(ctx) {
     await ctx.render('register');
-});
+}
 
-router.post('/register', async (ctx) => {
+async function registerPOST(ctx) {
     try {
         const hash = await argon2.hash(ctx.request.body.password);
         await client.query("INSERT INTO users (email, password) VALUES ('"+ctx.request.body.email+"', '"+hash+"')");
@@ -82,14 +87,13 @@ router.post('/register', async (ctx) => {
     } catch (err) {
         ctx.response.json('Something wrong');
     }
+}
 
-});
-
-router.get('/login', async (ctx) => {
+async function loginGet(ctx) {
     await ctx.render('login');
-});
+}
 
-router.post('/login', async (ctx) => {
+async function loginPost(ctx) {
     const user = await client.query("SELECT * FROM users WHERE email='"+ctx.request.body.email+"'");
     console.log(ctx.request.body);
 
@@ -103,8 +107,7 @@ router.post('/login', async (ctx) => {
     } catch (err) {
         ctx.response.body = 'internal failure';
     }
-
-});
+}
 
 
 app.use(router.routes())
