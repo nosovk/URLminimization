@@ -1,0 +1,35 @@
+{
+  "name": "URLminimization",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon KoaIndex.js ",
+    "lint" : "eslint ."
+
+  },
+  "repository": "https://github.com/alexfilatov2000/URLminimization.git",
+  "author": "Alex Filatov <tanyaarni@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "argon2": "^0.26.1",
+    "express": "^4.17.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-pug": "^4.0.3",
+    "koa-router": "^8.0.0-alpha.1",
+    "koa-send": "^5.0.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.1",
+    "mongoose": "^5.9.5",
+    "pg": "^7.18.2",
+    "pug": "^2.0.4",
+    "rebrandly": "^2.0.1",
+    "shortid": "^2.2.15",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "eslint": "^6.8.0",
+    "request": "^2.88.2"
+  }
+}

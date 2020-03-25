@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    h1= Login
+
+    form(method="POST")
+        .form-group
+            label Email:
+            input.form-control(type="text", id="em")
+        .form-group
+            label Password:
+            input.form-control(type="password", id="psw")
+
+        input.btn.btn-primary(type="button", value="Submit", onclick='myLogin()')
+
+    #hello
+    script(src='js/login.js')

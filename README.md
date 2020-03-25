@@ -22,10 +22,9 @@ Building a custom URL shortening service like bitly.com using ExpressJs and Mong
 
 - ### Back end
 
-  - [Express](https://expressjs.com/)- Nodejs framwork for building the REST Apis
-  - [Mongodb](http://mongodb.com/)- Document oriented NoSQL database
-  - [Mongoose](https://http://mongoosejs.com)- MongoDB object modeling tool
-  - [Short-id](https://github.com/dylang/shortid)- Short id generator
+  - [Koa](https://koajs.com/)- Nodejs framwork for building the REST Apis
+  - [PostgreSQL](http://mongodb.com/)- SQL database
+  - [Short-id](https://www.rebrandly.com/)- id generator
   - [Valid-url](https://github.com/ogt/valid-url)- URI validation functions
 
 - ### Front end
