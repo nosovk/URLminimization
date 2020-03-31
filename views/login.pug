@@ -3,16 +3,17 @@ extends layout
 block content
 
     h1= Login
+    include messages/logMsg
+
 
     form(method="POST")
         .form-group
             label Email:
-            input.form-control(type="text", id="em")
+            input.form-control(type="text", name="email")
         .form-group
             label Password:
-            input.form-control(type="password", id="psw")
+            input.form-control(type="password", name="password")
 
-        input.btn.btn-primary(type="button", value="Submit", onclick='myLogin()')
+        input.btn.btn-primary(type="submit", value="Submit", onclick='myLogin()')
 
-    #hello
-    script(src='js/login.js')
+

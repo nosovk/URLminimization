@@ -3,28 +3,37 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon KoaIndex.js ",
-    "lint" : "eslint ."
-
+    "start": "nodemon index.js ",
+    "lint": "eslint ."
   },
   "repository": "https://github.com/alexfilatov2000/URLminimization.git",
   "author": "Alex Filatov <tanyaarni@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "argon2": "^0.26.1",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "geoip-lite": "^1.4.1",
+    "ip": "^1.1.5",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-pug": "^4.0.3",
     "koa-router": "^8.0.0-alpha.1",
     "koa-send": "^5.0.0",
+    "koa-session": "^5.13.1",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1",
     "mongoose": "^5.9.5",
     "pg": "^7.18.2",
+    "public-ip": "^4.0.0",
     "pug": "^2.0.4",
     "rebrandly": "^2.0.1",
+    "request-promise": "^4.2.5",
     "shortid": "^2.2.15",
+    "socket.io": "^2.3.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

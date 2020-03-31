@@ -1,11 +1,21 @@
 extends layout
 
 block content
+    h1=user
     form#mainForm(method="POST")
         input(type='text', name='url', size='100')
         input.btn.btn-primary(type="button", value="ok", onclick='originalLink()')
 
     #response
+
+    h1="Score:"
+
+    each val in myCase
+        div
+            a(href=val.urlcode) #{val.urlcode},
+            span=' Country: ' + val.country + ', '
+            span=' Transitions: ' + val.cnt
+
 
     script(src='js/app.js')
 
