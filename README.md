@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">What is URL-Minimization</h4>
-<div align="center">
+<div>
   <p>Suppose you have an e-commerce application with different types of products under different categories. <br><br>
        Forex: www.myshoppingsite/category/shoe/product/nike132032<br><br>
        If a customer wants to share the product using the above link, this could be really annoying due to the excessive character length of the URL. <br><br>
