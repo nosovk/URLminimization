@@ -7,33 +7,27 @@ const publicIp = require('public-ip');
 exports.main = async(ctx) => {
     //Gey unique elements from db
     const newLoc = await client.query("with maxcnt as (SELECT max(cnt) as cnt, urlcode  FROM location GROUP BY urlcode) select * from location natural join maxcnt order by cnt desc limit 5");
+    console.log(ctx.request.user.email);
+    ctx.body = {links: newLoc.rows, user:ctx.request.user.email};
 
-    await ctx.render('index', {
-        myCase: newLoc.rows,
-        user: ctx.request.user.email
-    });
 };
 
 
 exports.createShortLink = async(ctx) => {
     const longUrl = ctx.request.body.OriginalName;
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = 'http://localhost:5000';
     const urlCode = shortid.generate();
 
     if (validUrl.isUri(longUrl)) {
         try {
-            const url = await client.query("SELECT * FROM urlshema WHERE longurl='"+longUrl+"'");
+            const url = await client.query("SELECT * FROM urlshema WHERE longurl= $1", [longUrl]);
 
             if(url.rows[0]){
-                await ctx.render('dev', {
-                    shortUrl: url.rows[0].shorturl
-                });
+                ctx.body = {shortUrl: url.rows[0].shorturl};
             } else {
                 const shortUrl = baseUrl + '/' +urlCode;
-                await client.query("INSERT INTO urlshema (longurl, shorturl, urlcode) VALUES ('"+longUrl+"', '"+shortUrl+"', '"+urlCode+"' )");
-                await ctx.render('dev', {
-                    shortUrl: shortUrl
-                });
+                await client.query("INSERT INTO urlshema (longurl, shorturl, urlcode) VALUES ($1, $2, $3)", [longUrl, shortUrl, urlCode]);
+                ctx.body = {shortUrl: shortUrl};
             }
 
         } catch(err) {
@@ -49,18 +43,18 @@ exports.redirectByCode = async(ctx) => {
     try {
         let ip = await publicIp.v4();
         let geo = geoip.lookup(ip);
-        const url = await client.query("SELECT * FROM urlshema WHERE urlcode='"+ctx.params.code+"'");
+        const url = await client.query("SELECT * FROM urlshema WHERE urlcode = $1", [ctx.params.code]);
 
         if(url.rows[0]){
-            const baseUrl = 'http://localhost:3000';
+            const baseUrl = 'http://localhost:5000';
             const shortUrl = baseUrl + '/' +ctx.params.code;
 
-            const location = await client.query("SELECT * FROM location WHERE urlcode='"+shortUrl+"' AND country='"+geo.country+"'");
+            const location = await client.query("SELECT * FROM location WHERE urlcode = $1 AND country = $2", [shortUrl, geo.country]);
             if (location.rows[0]){
                 let cnt = location.rows[0].cnt + 1;
-                await client.query("UPDATE location SET cnt = '"+cnt+"' WHERE urlcode='"+shortUrl+"' AND country='"+geo.country+"'" );
+                await client.query("UPDATE location SET cnt = $1 WHERE urlcode = $2 AND country = $3", [cnt, shortUrl, geo.country]);
             }  else {
-                await client.query("INSERT INTO location (country, urlcode) VALUES ('"+geo.country+"', '"+shortUrl+"')");
+                await client.query("INSERT INTO location (country, urlcode) VALUES ($1, $2)", [geo.country, shortUrl]);
             }
 
             return ctx.redirect(url.rows[0].longurl)
