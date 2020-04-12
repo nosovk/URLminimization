@@ -38,7 +38,7 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
 
 - ### Front end
 
-  - [Pug](https://pugjs.org/api/getting-started.html)- Pug is a high performance template engine heavily influenced by Haml and implemented with JavaScript for Node.js and browsers.
+  - [React](https://pugjs.org/api/getting-started.html)- Pug is a high performance template engine heavily influenced by Haml and implemented with JavaScript for Node.js and browsers.
 
 
 ## ☑ TODO
