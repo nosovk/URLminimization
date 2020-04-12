@@ -2,7 +2,7 @@ const koa = require('koa');
 const serve = require('koa-static');
 const views = require('koa-views');
 const bodyParser = require('koa-bodyparser');
-const router = require('./src/routers/index');
+const router = require('./src/routers');
 const dotenv = require('dotenv');
 
 dotenv.config();
