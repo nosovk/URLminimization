@@ -1,8 +1,8 @@
-const koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('./src/routers/index');
-const dotenv = require('dotenv');
-const cors = require('@koa/cors');
+import koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import router from './src/routers/index';
+import dotenv from 'dotenv';
+import cors from '@koa/cors';
 
 dotenv.config();
 

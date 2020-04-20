@@ -1,10 +1,11 @@
-const urlController = require('../controllers/urlController');
-const Router = require('koa-router');
+import {main, createShortLink, redirectByCode} from '../controllers/urlController';
+import Router from 'koa-router';
+import {auth} from '../verifyToken';
 const router = new Router();
-const auth = require('../verifyToken');
 
-router.get('/', auth, urlController.main)
-    .post('/api/url/shorten', urlController.createShortLink)
-    .get('/:code', urlController.redirectByCode);
+router
+    .get('/', auth, main)
+    .post('/api/url/shorten', createShortLink)
+    .get('/:code', redirectByCode);
 
-module.exports = router.routes();
+export default router.routes();

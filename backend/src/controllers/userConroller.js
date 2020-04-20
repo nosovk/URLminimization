@@ -1,10 +1,12 @@
-const client = require('../../models/db');
-const argon2 = require('argon2');
-const {registerSchema, loginSchema} = require('../validation');
-const jwt = require('jsonwebtoken');
+import client from '../../models/db';
+import argon2 from 'argon2';
+import {registerSchema, loginSchema, resetSchema} from '../validation';
+import jwt from 'jsonwebtoken';
+import {getPasswordResetURL, resetPasswordTemplate} from '../resetPsw'
+import nodemailer from "nodemailer"
 
 
-exports.registerPost = async(ctx) => {
+export const registerPost = async(ctx) => {
     //Validate a data before we a user
     const {error} = registerSchema.validate(ctx.request.body);
     if (error) return ctx.body = {error : error.message};
@@ -19,8 +21,6 @@ exports.registerPost = async(ctx) => {
     //Create a new user
     await client.query("INSERT INTO users (email, password) VALUES ($1, $2)", [ctx.request.body.email, hash]);
     try {
-        //const user = await client.query("SELECT * FROM users WHERE email = $1", [ctx.request.body.email]);
-        //console.log(user.rows[0].id);
         ctx.body = {user: true};
     } catch (err) {
         ctx.throw(400, err);
@@ -28,7 +28,7 @@ exports.registerPost = async(ctx) => {
 };
 
 
-exports.loginPost = async(ctx) => {
+export const loginPost = async(ctx) => {
     //Validate a data before we a user
     const {error} = loginSchema.validate(ctx.request.body);
     if (error) return ctx.body = {error : error.message};
@@ -41,7 +41,6 @@ exports.loginPost = async(ctx) => {
     const validPass = await argon2.verify(user.rows[0].password, ctx.request.body.password);
     if(!validPass) return ctx.body = {error : 'Invalid password'};
 
-    //console.log(user.rows[0].email);
     const accessToken = generateAccessToken({email: user.rows[0].email});
     // eslint-disable-next-line no-undef
     const refreshToken = jwt.sign(user.rows[0].email, process.env.REFRESH_TOKEN_SECRET);
@@ -49,7 +48,7 @@ exports.loginPost = async(ctx) => {
     ctx.body = {user: true, accessToken: accessToken, refreshToken: refreshToken};
 };
 
-exports.token = async(ctx) => {
+export const token = async(ctx) => {
     const refreshToken = ctx.request.body.token;
     if (refreshToken == null) return ctx.throw(401);
 
@@ -65,4 +64,55 @@ exports.token = async(ctx) => {
 function generateAccessToken(user) {
     // eslint-disable-next-line no-undef
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+}
+
+
+export const resetPassword = async(ctx) => {
+    const email = ctx.request.body.email;
+
+    let user = await client.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (!user.rows[0]) ctx.throw(404, "No user with that email");
+
+    console.log(process.env.EMAIL_LOGIN, process.env.EMAIL_PASSWORD);
+
+    const token = jwt.sign({_id: user.rows[0].id}, process.env.RESET_TOKEN_SECRET, { expiresIn: '1h' });
+    const url = getPasswordResetURL(user.rows[0], token)
+    const emailTemplate = resetPasswordTemplate(user.rows[0], url)
+
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_LOGIN,
+            pass: process.env.EMAIL_PASSWORD
+        }
+    })
+    let info = await transporter.sendMail(emailTemplate);
+    console.log("Message sent: %s", info.messageId);
+    ctx.body = true;
+};
+
+export const receiveNewPassword = async(ctx) => {
+    const { _id, token } = ctx.params;
+    const { password } = ctx.request.body;
+    //Token Validation
+    try {
+        jwt.verify(token, process.env.RESET_TOKEN_SECRET);
+    } catch (err) {
+        return ctx.body = {error : 'Time is over'};
+    }
+    //Password Validation
+    const {error} = resetSchema.validate(ctx.request.body);
+    if (error) return ctx.body = {error : error.message};
+
+    let user = await client.query("SELECT * FROM users WHERE id = $1", [_id]);
+    if (!user.rows[0]) ctx.throw(500);
+
+    const payload = jwt.decode(token, process.env.RESET_TOKEN_SECRET);
+    if (payload._id === user.rows[0].id) {
+        const hash = await argon2.hash(password);
+        await client.query("UPDATE users SET password = $1 WHERE id = $2", [hash, _id]);
+        ctx.body = {_id, token, error: 'Your password has been saved', submitted: true};
+    } else {
+        ctx.throw(400, "Something wrong")
+    }
 }

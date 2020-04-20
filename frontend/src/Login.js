@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Form, Button, Alert} from 'react-bootstrap'
+import {Link} from "react-router-dom";
 
 
 class Login extends Component {
@@ -65,7 +66,11 @@ class Login extends Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" id="passw"/>
                 </Form.Group>
-
+                <div>
+                    <Link to="/resetPsw" className="ghost-btn">
+                        Forgot your password?
+                    </Link>
+                </div>
                 <Button variant="primary" type="button" onClick={this.handleClick}>
                     Submit
                 </Button>

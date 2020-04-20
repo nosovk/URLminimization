@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 
 
-const registerSchema = Joi.object({
+export const registerSchema = Joi.object({
     email: Joi.string()
         .min(6)
         .required()
@@ -12,7 +12,7 @@ const registerSchema = Joi.object({
     password2: Joi.ref('password')
 });
 
-const loginSchema = Joi.object({
+export const loginSchema = Joi.object({
     email: Joi.string()
         .min(6)
         .required()
@@ -22,6 +22,9 @@ const loginSchema = Joi.object({
         .required(),
 });
 
-
-module.exports.registerSchema = registerSchema;
-module.exports.loginSchema = loginSchema;
+export const resetSchema = Joi.object({
+    password: Joi.string()
+        .min(6)
+        .required(),
+    password2: Joi.ref('password')
+});
