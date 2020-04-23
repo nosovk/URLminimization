@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Switch, Route, useParams} from 'react-router-do
 import Layout from './components/Layout';
 import Navbar from './components/NavBar'
 import EmailTokenReset from "./EmailTokenReset";
+import Facebook from "./Facebook";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/resetPsw" component={ResetPsw} />
+                  <Route path="/authenticate/facebook" component={Facebook} />
                   <Route
                       path="/update-password/:_id/:token"
                       render={({ match }) => (

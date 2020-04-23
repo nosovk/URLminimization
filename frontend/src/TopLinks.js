@@ -62,11 +62,12 @@ class TopLinks extends Component {
     }
 
     render() {
+        const baseUrl = 'http://localhost:5000/';
         return (
             <div>
                 <ListGroup>
                     {this.state.links.map(link =>
-                        <ListGroup.Item variant="Light" key={link.id}><a href={link.urlcode}>{link.urlcode}</a> {', Country: '+link.country} {', Transitions: '+link.cnt}</ListGroup.Item>
+                        <ListGroup.Item variant="Light" key={link.id}><a href={baseUrl+link.urlcode}>{link.urlcode}</a> {', Country: '+link.country} {', Transitions: '+link.cnt}</ListGroup.Item>
                     )}
                 </ListGroup>
                 <div>{this.state.user}</div>

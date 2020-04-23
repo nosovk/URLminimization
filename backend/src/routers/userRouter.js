@@ -9,4 +9,5 @@ router
     .post('/resetPassword', resetPassword)
     .post('/password/reset/:_id/:token', receiveNewPassword)
 
+
 export default router.routes();

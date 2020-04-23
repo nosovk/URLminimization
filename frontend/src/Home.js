@@ -8,7 +8,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shortUrl: ''
+            urlCode: ''
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -23,11 +23,12 @@ class Home extends Component {
         const response = await fetch('http://localhost:5000/api/url/shorten', requestOptions);
         const data = await response.json();
         console.log(data);
-        this.setState({ shortUrl: data.shortUrl });
+        this.setState({ urlCode: data.urlCode });
 
     }
 
     render() {
+        const shortUrl = 'http://localhost:5000/'+ this.state.urlCode;
         return (
             <div>
                 <Form>
@@ -45,7 +46,7 @@ class Home extends Component {
                         Submit
                     </Button>
                 </Form>
-                <a href={this.state.shortUrl}>{this.state.shortUrl}</a>
+                <a href={shortUrl}>{this.state.urlCode}</a>
                 <TopLinks/>
             </div>
         );
