@@ -6,9 +6,6 @@ import publicIp from 'public-ip';
 import ip from 'ip'
 
 export const main = async(ctx) => {
-    //It's just for test
-    console.log(ip.address())
-
     //Gey unique elements from db
     const newLoc = await client.query("with maxcnt as (SELECT max(cnt) as cnt, urlcode  FROM location GROUP BY urlcode) select * from location natural join maxcnt order by cnt desc limit 5");
     ctx.body = {links: newLoc.rows, user: ctx.request.user.email};
