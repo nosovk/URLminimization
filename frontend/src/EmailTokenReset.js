@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {InputGroup, FormControl, Button, Form, Alert} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {URL} from "./config";
 
 
 class EmailTokenReset extends Component {
@@ -25,7 +26,7 @@ class EmailTokenReset extends Component {
                 password2: document.getElementById('password2').value
             })
         };
-        const response = await fetch(`http://localhost:5000/password/reset/${_id}/${token}`, requestOptions);
+        const response = await fetch(`${URL}/password/reset/${_id}/${token}`, requestOptions);
         const data = await response.json();
         this.setState({ submitted: data.submitted, error: data.error });
     }

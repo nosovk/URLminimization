@@ -72,8 +72,6 @@ export const resetPassword = async(ctx) => {
     let user = await client.query("SELECT * FROM users WHERE email = $1", [email]);
     if (!user.rows[0]) ctx.throw(404, "No user with that email");
 
-    console.log(process.env.EMAIL_LOGIN, process.env.EMAIL_PASSWORD);
-
     const token = jwt.sign({_id: user.rows[0].id}, process.env.RESET_TOKEN_SECRET, { expiresIn: '1h' });
     const url = getPasswordResetURL(user.rows[0], token)
     const emailTemplate = resetPasswordTemplate(user.rows[0], url)

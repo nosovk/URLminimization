@@ -1,6 +1,5 @@
 const Joi = require('@hapi/joi');
 
-
 export const registerSchema = Joi.object({
     email: Joi.string()
         .min(6)

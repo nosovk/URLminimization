@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {ListGroup} from "react-bootstrap";
+import {URL} from "./config";
 
 class TopLinks extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class TopLinks extends Component {
     }
 
     async refreshToken(url, requestOptions){
-        const response = await fetch('http://localhost:5000/token', requestOptions);
+        const response = await fetch(`${URL}/token`, requestOptions);
         const data = await response.json();
         await sessionStorage.setItem('tokenData', JSON.stringify(data));
         console.log(data);
@@ -62,7 +63,7 @@ class TopLinks extends Component {
     }
 
     render() {
-        const baseUrl = 'http://localhost:5000/';
+        const baseUrl = `${URL}/`;
         return (
             <div>
                 <ListGroup>
@@ -75,7 +76,6 @@ class TopLinks extends Component {
         );
     }
 }
-
 
 
 const parseJwt = (token) => {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {InputGroup, FormControl, Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {URL} from "./config";
 
 
 class ResetPsw extends Component {
@@ -20,7 +21,7 @@ class ResetPsw extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: document.getElementById('email').value })
         };
-        const response = await fetch('http://localhost:5000/resetPassword', requestOptions);
+        const response = await fetch(`${URL}/resetPassword`, requestOptions);
         const data = await response.json();
         this.setState({ pushedButton: data});
     }

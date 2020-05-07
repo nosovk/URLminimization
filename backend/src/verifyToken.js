@@ -10,7 +10,6 @@ export const auth = async(ctx, next) => {
         ctx.request.user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         return next()
     } catch (err) {
-         console.log('timmmmmmmeee');
         ctx.throw(400, err);
     }
 };

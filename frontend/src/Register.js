@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Form, Button, Alert} from "react-bootstrap";
+import {URL} from "./config";
 
 
 class Register extends Component {
@@ -23,7 +24,7 @@ class Register extends Component {
                 password2: document.getElementById('password2').value
             })
         };
-        const response = await fetch('http://localhost:5000/register', requestOptions);
+        const response = await fetch(`${URL}/register`, requestOptions);
         const data = await response.json();
         console.log(data);
         this.setState({ message: data.error, user: data.user});

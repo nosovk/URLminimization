@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {Form, Button, Alert} from 'react-bootstrap'
 import {Link} from "react-router-dom";
+import {URL} from "./config"
 
 
 class Login extends Component {
@@ -25,7 +26,7 @@ class Login extends Component {
                 password: document.getElementById('passw').value
             })
         };
-        const response = await fetch('http://localhost:5000/login', requestOptions);
+        const response = await fetch(`${URL}/login`, requestOptions);
         const data = await response.json();
 
         saveToken({

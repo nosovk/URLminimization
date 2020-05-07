@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {InputGroup, FormControl, Button, Form} from "react-bootstrap";
 import TopLinks from "./TopLinks";
+import {URL} from "./config"
 
 
 class Home extends Component {
@@ -20,7 +21,7 @@ class Home extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ OriginalName: document.getElementById('basic-url').value })
         };
-        const response = await fetch('http://localhost:5000/api/url/shorten', requestOptions);
+        const response = await fetch(`${URL}/api/url/shorten`, requestOptions);
         const data = await response.json();
         console.log(data);
         this.setState({ urlCode: data.urlCode });
@@ -28,7 +29,7 @@ class Home extends Component {
     }
 
     render() {
-        const shortUrl = 'http://localhost:5000/'+ this.state.urlCode;
+        const shortUrl = `${URL}/`+ this.state.urlCode;
         return (
             <div>
                 <Form>
