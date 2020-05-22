@@ -1,0 +1,14 @@
+INSERT INTO public.users (id, email, password) VALUES (19, 'hin2@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$nMo70k/EpnCuVKzxfoxHmQ$z0JjzQTQqm4fhkJV+n4U1AFmuNBnNZyYGGC8k0kp7EY');
+INSERT INTO public.users (id, email, password) VALUES (20, 'hin22@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$8+LyST1bJTM+yYFEOK4vCQ$Txn0gecCOiKEZ4Cj9sbM9F3lud1M0MYkiJMy+K3KucI');
+INSERT INTO public.users (id, email, password) VALUES (21, 'tanyaarneei@gmail.com', '$argon2i$v=19$m=4096,t=3,p=1$LSW4voqN0CAfRzw5KRsY8Q$dsHE+AsZzMbnBz0ERuticrpNTMwRh90cRfMwS4Cd2wc');
+INSERT INTO public.users (id, email, password) VALUES (22, 'hin222@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$a9iKMViP1G93SSAUJ3pXtQ$dFy76nfsdiQaDdwLXJnvVn4LdgEqWeEPLNbPhRAYZQQ');
+INSERT INTO public.users (id, email, password) VALUES (23, 'hin2222@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$eeNOkgAEFx9HdWXIfcSVow$bi3bDUo1fLofEidvE+WIaBPh6hg5vPIp2VvkAtLoERI');
+INSERT INTO public.users (id, email, password) VALUES (24, 'hin23333@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$qv+XxuhNEG6E18pvjmTFfg$RNiW6BuHBe9YNWRxtiOhaabZrlKld6kB6TO76vLVfpk');
+INSERT INTO public.users (id, email, password) VALUES (25, 'hin2www@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$lw1gVs8siBfQRqynceDAmA$owyL2Oh9HfPpkpIWrLdeltqn0E01XfUUHyJGpCMQIuA');
+INSERT INTO public.users (id, email, password) VALUES (26, 'hin233@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$WA8tilFkSRHXjcob2iNeXw$FPpjpWfsUABA03ZyVkMHyWYrd8YYglcQvIOq0aX2Ms8');
+INSERT INTO public.users (id, email, password) VALUES (27, 'hin2333333@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$sdWJgv0lWDBAYTucOSc+Rw$/mhbu8TzA5a80BSSMzlaGVPb/K0ay3eWBveLGKK83Tc');
+INSERT INTO public.users (id, email, password) VALUES (28, 'hin2444@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$rN/kCjHUE1f3dMuCEV/AqQ$PQhqvCGv6OJeQIga+S8ipT0a7SIZEHUJF2MtIwv6bXg');
+INSERT INTO public.users (id, email, password) VALUES (29, 'hin2wwwww@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$sP1o3oKMOQW6zr6Agfc9Ww$EGgjku0U7Bzj9Jo3U+CnkHjnzS190E3XGpmml1kjr0w');
+INSERT INTO public.users (id, email, password) VALUES (30, 'hin2ddwfw@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$eeTqNrFOUAZwYiG7thzivQ$JFgu/KAq4SGzsCnrPoC/5kYK+L0ebOMm5dAH1R0n+7g');
+INSERT INTO public.users (id, email, password) VALUES (31, 'hin2wwwew@mail.ru', '$argon2i$v=19$m=4096,t=3,p=1$y6XqSsVQ3AKWyRebzbt7bQ$iLA/e9WnRck7tthUjpaHyw9PoIl4vnxftR8D+CObLrs');
+INSERT INTO public.users (id, email, password) VALUES (18, 'tanyaarni@gmail.com', '$argon2i$v=19$m=4096,t=3,p=1$u0yqq+8MXxb0H6zOL+1ZFA$JbeZhSZee8G+SgPCFun/csmA47xAz99bUaDFdN7qHcw');

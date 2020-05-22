@@ -3,6 +3,7 @@ import bodyParser from 'koa-bodyparser';
 import router from './src/routers/index';
 import dotenv from 'dotenv';
 import cors from '@koa/cors';
+import ngrok from 'ngrok';
 
 dotenv.config();
 
@@ -14,7 +15,10 @@ app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(5000);
+app.listen(process.env.PORT, async () => {
+    const ngLink = await ngrok.connect(process.env.PORT);
+    console.log(`link is available on ${ngLink}`);
+});
 
 
 

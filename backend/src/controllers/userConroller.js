@@ -4,6 +4,7 @@ import {registerSchema, loginSchema, resetSchema} from '../validation';
 import jwt from 'jsonwebtoken';
 import {getPasswordResetURL, resetPasswordTemplate} from '../resetPsw'
 import nodemailer from "nodemailer"
+import ipp from 'ip'
 
 export const registerPost = async(ctx) => {
     //Validate a data before we a user
