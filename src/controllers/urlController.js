@@ -30,9 +30,9 @@ export const createShortLink = async(ctx) => {
 
 
 export const redirectByCode = async(ctx) => {
-    //let ip = await publicIp.v4();
-    //let geo = geoip.lookup(ip);
-    let geo = geoip.lookup(ipadress.address());
+    let ip = await publicIp.v4();
+    let geo = geoip.lookup(ip);
+    //let geo = geoip.lookup(ipadress.address());
     const urlCode = ctx.params.code;
 
     const url = await client.query("SELECT * FROM urlshema WHERE urlcode = $1", [urlCode]);

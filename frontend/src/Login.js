@@ -53,7 +53,7 @@ class Login extends Component {
         }
 
         return this.state.user ? (
-            window.location.assign('http://localhost:3000/')
+            window.location.assign('/')
         ) : (
             <Form>
                 <h1>Login</h1>

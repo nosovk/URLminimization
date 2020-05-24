@@ -4,7 +4,7 @@ import {auth} from '../verifyToken';
 const router = new Router();
 
 router
-    .get('/', main)
+    .get('/', auth, main)
     .post('/api/url/shorten', createShortLink)
     .get('/:code', redirectByCode);
 

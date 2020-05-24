@@ -5,8 +5,9 @@
   "scripts": {
     "start": "nodemon -r esm index.js",
     "lint": "eslint .",
-    "client": "cd ../frontend && yarn start",
-    "dev": "concurrently \"yarn run start\" \"yarn run client\""
+    "client": "cd frontend && yarn start",
+    "dev": "concurrently \"yarn run start\" \"yarn run client\"",
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix frontend && yarn run build --prefix client"
   },
   "repository": "https://github.com/alexfilatov2000/URLminimization.git",
   "author": "Alex Filatov <tanyaarni@gmail.com>",

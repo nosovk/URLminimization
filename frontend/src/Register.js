@@ -42,7 +42,7 @@ class Register extends Component {
         }
 
         return this.state.user ? (
-            window.location.assign('http://localhost:3000/login')
+            window.location.assign('/login')
         ) : (
             <div>
                 <Form>

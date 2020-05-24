@@ -44,7 +44,7 @@ class TopLinks extends Component {
         let decode = parseJwt(tokenData.accessToken);
         if (Date.now() >= decode.exp * 1000) {
             console.log('time over');
-            await this.refreshToken('http://localhost:5000/token', requestOptions);
+            await this.refreshToken(`${URL}/token`, requestOptions);
         }
 
         let NewToken = JSON.parse(sessionStorage.tokenData);
@@ -56,7 +56,7 @@ class TopLinks extends Component {
             }
         };
 
-        fetch('http://localhost:5000', options)
+        fetch(URL, options)
             .then(res => res.json())
             .then(data => this.setState({links: data.links, user: data.user}, () => console.log('links fetched', data.links)));
 
