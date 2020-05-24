@@ -25,10 +25,10 @@ if (process.env.NODE_ENV === 'production'){
     // })
 }
 
-app.listen(PORT, async () => {
-    const ngLink = await ngrok.connect(PORT);
-    console.log(`link is available on ${ngLink}`);
-});
+app.listen(PORT);
+    // const ngLink = await ngrok.connect(PORT);
+    // console.log(`link is available on ${ngLink}`);
+
 
 
 
