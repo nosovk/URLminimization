@@ -20,9 +20,9 @@ app.use(router.allowedMethods());
 if (process.env.NODE_ENV === 'production'){
     app.use(serve('frontend/build'));
 
-    app.get('*', ctx => {
-        ctx.response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-    })
+    // app.get('*', ctx => {
+    //     ctx.response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    // })
 }
 
 app.listen(PORT, async () => {
