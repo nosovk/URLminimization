@@ -17,17 +17,20 @@ app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-if (process.env.NODE_ENV === 'production'){
-    app.use(serve('frontend/build'));
+// if (process.env.NODE_ENV === 'production'){
+//     app.use(serve('frontend/build'));
+//
+//     // app.get('*', ctx => {
+//     //     ctx.response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+//     // })
+// }
 
-    // app.get('*', ctx => {
-    //     ctx.response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-    // })
-}
+app.listen(PORT, async () => {
+    const ngLink = await ngrok.connect(PORT);
+    console.log(`link is available on ${ngLink}`);
+});
 
-app.listen(PORT);
-    // const ngLink = await ngrok.connect(PORT);
-    // console.log(`link is available on ${ngLink}`);
+
 
 
 
