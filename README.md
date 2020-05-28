@@ -47,7 +47,7 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
   - [ ] redirection type coud be
       - [ ] 301 http status plus location
       - [ ] 302 http status plus location
-      - [ ] meta tag redirect
+      - [ ] [meta tag redirect](https://www.w3.org/TR/WCAG20-TECHS/H76.html)
       - [ ] js redirect
 - [ ] each shourt url coud have unlimited list of redirect url with different conditins and one fallback redirection if non of conditions met
 - [ ] user should be able to see statisctics on each link and conditions fired in it
