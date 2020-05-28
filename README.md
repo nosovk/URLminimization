@@ -51,6 +51,8 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
       - [ ] js redirect
 - [ ] each shourt url coud have unlimited list of redirect url with different conditins and one fallback redirection if non of conditions met
 - [ ] user should be able to see statisctics on each link and conditions fired in it
+- [ ] empty project should be inited with db, if tables are not precent in it
+- [ ] no publicip, ngrock etc packs in server code
 - [X] User authorization. Primarily about registration, so I'll use "@hapi/joi" module for validation email and password, and "argon2" module to hash password, if everything correct I'll sent all data to database. Now about logIn, here we will use the same validation as in registration and verify password hash with "argon2"
 - [x] Use JWT authorization. After validation in logIn function we will use "jsonwebtoken" module, so everything we need is create a token and sent this token to headers. Then in private route we will check if token exists we will give access if not access will be denied.
 - [ ] Log out. Now I'm not really sure how to do this
