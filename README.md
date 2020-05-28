@@ -43,7 +43,7 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
 
 - [ ] Redirection entity has params - countrycode, device type, redirection type, url to redirect, shorturl
   - [ ] country code obtained via geoip from request.ip
-  - [ ] device type obtained from useragent srting via uaparser (mobile, desktop, ios, android)
+  - [ ] device type obtained from useragent srting via [uaparser](http://faisalman.github.io/ua-parser-js/) (mobile, desktop, ios, android)
   - [ ] redirection type coud be
       - [ ] 301 http status plus location
       - [ ] 302 http status plus location
