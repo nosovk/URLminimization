@@ -24,13 +24,13 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
 
   - [Koa](https://koajs.com/)- Nodejs framwork for building the REST Apis
   - [Koa-static](https://koajs.com/)- for static files
-  - [Koa-views](https://koajs.com/)- for using Pug
+  - [Nodemailer](https://nodemailer.com/about/)- for mail
   - [Koa-bodyparser](https://koajs.com/)- for post routes
   - [Dotenv](https://github.com/motdotla/dotenv#readme)- for private data
-  - [PostgreSQL](http://mongodb.com/)- SQL database
+  - [PostgreSQL](https://www.postgresql.org/)- SQL database
   - [Shortid](https://github.com/dylang/shortid#readme)- id generator
   - [Valid-url](https://github.com/ogt/valid-url)- URI validation functions
-  - [Public-ip](https://github.com/sindresorhus/public-ip#readme)- client ip address
+  - [Ua-parser-js](https://www.npmjs.com/package/ua-parser-js)-  This library aims to identify detailed type of web browser, layout engine, operating system, cpu architecture, and device type/model, entirely from user-agent string with a relatively small footprint
   - [Geoip-lite](https://github.com/bluesmoon/node-geoip)- information about client ip address
   - [Argon2](https://github.com/ranisalt/node-argon2#readme)- hash password
   - [@hapi/joi](https://github.com/hapijs/joi#readme)- user validation
@@ -39,6 +39,7 @@ Building a custom URL shortening service like bitly.com using Koa and PostgreSQL
 - ### Front end
 
   - [React]
+  - [Bootstarp4](https://getbootstrap.com/)
 
 
 ## ☑ TODO
