@@ -68,7 +68,12 @@ class TopLinks extends Component {
             <div>
                 <ListGroup>
                     {this.state.links.map(link =>
-                        <ListGroup.Item variant="Light" key={link.id}><a href={baseUrl+link.urlcode}>{link.urlcode}</a> {', Country: '+link.country} {', Transitions: '+link.cnt}</ListGroup.Item>
+                        <ListGroup.Item variant="Light" key={link.id}>
+                            <a href={baseUrl+link.short_url}>
+                                {baseUrl+link.short_url}
+                            </a>
+                            {', Country: '+link.country_code} {', Device: '+link.device_type} {', cnt: '+link.count} {', longUrl: '+link.long_url}
+                        </ListGroup.Item>
                     )}
                 </ListGroup>
                 <div>{this.state.user}</div>

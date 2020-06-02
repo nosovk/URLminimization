@@ -29,6 +29,12 @@ export const registerPost = async(ctx) => {
 
 
 export const loginPost = async(ctx) => {
+    //Check if tables exists
+    await client.query("do $$\n" +
+        "begin\n" +
+        "\tcall transfer();\n" +
+        "end\n" +
+        "$$;");
     //Validate a data before we a user
     const {error} = loginSchema.validate(ctx.request.body);
     if (error) return ctx.body = {error : error.message};
@@ -85,7 +91,7 @@ export const resetPassword = async(ctx) => {
         }
     })
     let info = await transporter.sendMail(emailTemplate);
-    console.log("Message sent: %s", info.messageId);
+    //console.log("Message sent: %s", info.messageId);
     ctx.body = true;
 };
 

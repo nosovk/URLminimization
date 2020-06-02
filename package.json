@@ -30,7 +30,6 @@
     "koa-router": "^8.0.0-alpha.1",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1",
-    "ngrok": "^3.2.7",
     "nodemailer": "^6.4.6",
     "pg": "^7.18.2",
     "public-ip": "^4.0.0",
@@ -39,6 +38,7 @@
     "request-promise": "^4.2.5",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",
+    "ua-parser-js": "^0.7.21",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

@@ -7,6 +7,7 @@ import ResetPsw from "./ResetPsw";
 import {BrowserRouter as Router, Switch, Route, useParams} from 'react-router-dom';
 import Layout from './components/Layout';
 import Navbar from './components/NavBar'
+import Account from "./Account";
 import EmailTokenReset from "./EmailTokenReset";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/resetPsw" component={ResetPsw} />
+                  <Route path="/account" component={Account} />
                   <Route
                       path="/update-password/:_id/:token"
                       render={({ match }) => (

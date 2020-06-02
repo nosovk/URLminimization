@@ -1,7 +1,7 @@
-create database url
-	with owner alex__filatov;
-
-create table if not exists users
+CREATE OR REPLACE PROCEDURE transfer()
+AS $$
+BEGIN
+    create table if not exists users
 (
 	id serial not null
 		constraint users_pk
@@ -10,19 +10,19 @@ create table if not exists users
 	password varchar(255) not null
 );
 
-alter table users owner to alex__filatov;
 
-create table if not exists location
+create table if not exists redirection
 (
 	id serial not null
-		constraint location_pk
+		constraint redirection_pk
 			primary key,
-	country varchar(255),
-	cnt integer default 0,
-	urlcode varchar(255)
+	country_code varchar(255),
+	device_type varchar(255),
+	redirection_type varchar(255),
+	long_url varchar(255),
+	short_url varchar(255)
 );
 
-alter table location owner to alex__filatov;
 
 create table if not exists tokens
 (
@@ -32,7 +32,6 @@ create table if not exists tokens
 	rtoken varchar(255)
 );
 
-alter table tokens owner to alex__filatov;
 
 create table if not exists urlshema
 (
@@ -43,4 +42,6 @@ create table if not exists urlshema
 	urlcode varchar(255) not null
 );
 
-alter table urlshema owner to alex__filatov;
+
+END;
+$$ LANGUAGE plpgsql;

@@ -2,17 +2,23 @@ import validUrl from 'valid-url';
 import shortid from 'shortid';
 import client from '../../models/db';
 import geoip from 'geoip-lite';
-import publicIp from 'public-ip';
-import ipadress from 'ip'
+//import publicIp from 'public-ip';
+import parser from 'ua-parser-js'
+
 
 export const main = async(ctx) => {
     //Get unique elements from db
-    const newLoc = await client.query("with maxcnt as (SELECT max(cnt) as cnt, urlcode  FROM location GROUP BY urlcode) select * from location natural join maxcnt order by cnt desc limit 5");
+    const newLoc = await client.query("SELECT country_code, device_type, redirection_type, long_url, short_url, count(*)\n" +
+        "FROM redirection\n" +
+        "GROUP BY country_code, device_type, redirection_type, long_url, short_url");
     ctx.body = {links: newLoc.rows, user: ctx.request.user.email};
 
 };
 
 export const createShortLink = async(ctx) => {
+    let ua = parser(ctx.get('user-agent'));
+    console.log(ua);
+
     const longUrl = ctx.request.body.OriginalName;
     const urlCode = shortid.generate();
 
@@ -30,20 +36,20 @@ export const createShortLink = async(ctx) => {
 
 
 export const redirectByCode = async(ctx) => {
-    let ip = await publicIp.v4();
-    let geo = geoip.lookup(ip);
-    //let geo = geoip.lookup(ipadress.address());
-    const urlCode = ctx.params.code;
+    //console.log(ctx.request.user.email);
+    let ua = parser(ctx.get('user-agent'));
+    let geo = geoip.lookup(ctx.get('x-forwarded-for'));
 
+    //let ip = await publicIp.v4();
+    //let geo = geoip.lookup(ip);
+
+    const urlCode = ctx.params.code;
     const url = await client.query("SELECT * FROM urlshema WHERE urlcode = $1", [urlCode]);
+
     try {
-        const location = await client.query("SELECT * FROM location WHERE urlcode = $1 AND country = $2", [urlCode, geo.country]);
-        if (location.rows[0]){
-            let cnt = location.rows[0].cnt + 1;
-            await client.query("UPDATE location SET cnt = $1 WHERE urlcode = $2 AND country = $3", [cnt, urlCode, geo.country]);
-        }  else {
-            await client.query("INSERT INTO location (country, urlcode) VALUES ($1, $2)", [geo.country, urlCode]);
-        }
+        await client.query("INSERT INTO redirection (country_code, device_type, redirection_type, long_url, short_url)\n"+
+            "VALUES($1, $2, $3, $4, $5)", [geo.country, ua.os.name, 301, url.rows[0].longurl, urlCode]);
+
         return ctx.redirect(url.rows[0].longurl);
 
     } catch (err) {
